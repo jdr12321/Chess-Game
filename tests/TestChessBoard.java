@@ -6,11 +6,14 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import model.ChessBoard;
+import model.ChessPiece;
 import model.ChessPlayer;
 import model.IChessModel;
 
+import static model.ChessPieceType.KING;
 import static model.ChessPieceType.KNIGHT;
 import static model.ChessPieceType.NONE;
+import static model.ChessPieceType.QUEEN;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -1001,4 +1004,54 @@ public class TestChessBoard {
 
 
   }
+
+  @Test
+  public void testFullGame() {
+    model.startGame();
+    model.move(2, 5, 3, 5);
+    model.move(1, 4, 5, 8);
+
+    model.move(7, 5, 6, 5);
+    model.move(8, 5, 7, 5);
+
+    model.move(5, 8, 7, 8);
+    model.move(7, 8, 8, 8);
+    model.move(8, 8, 8, 7);
+    model.move(8, 7, 8, 6);
+    model.move(8, 6, 8, 5);
+    model.move(8, 5, 8, 4);
+    model.move(8, 4, 8, 3);
+    model.move(8, 3, 8, 2);
+    model.move(8, 2, 8, 1);
+
+    model.move(7, 5, 6, 4);
+    model.move(6, 4, 5, 3);
+    model.move(5, 3, 4, 2);
+    model.move(4, 2, 4, 1);
+
+    model.move(8, 1, 7, 1);
+
+    assertEquals(model.getState(),
+                "                        \n" +
+                      "Q+ P- P- P-    P- P-    \n" +
+                      "            P-          \n" +
+                      "                        \n" +
+                      "K-                      \n" +
+                      "            P+          \n" +
+                      "P+ P+ P+ P+    P+ P+ P+ \n" +
+                      "R+ N+ B+    K+ B+ N+ R+ \n");
+
+    model.advancePlayer();
+
+    assertEquals(model.currentPlayer(), ChessPlayer.BLACK);
+    assertEquals(model.isInCheck(ChessPlayer.BLACK), true);
+
+    ChessPiece king = model.getPieceAt(4, 1);
+
+    assertEquals(king.getMoveStrategy().cantMoveAtAll(4, 1), false);
+
+    assertEquals(model.isGameOver(), false);
+  }
+
+
 }

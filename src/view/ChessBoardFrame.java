@@ -62,4 +62,20 @@ public class ChessBoardFrame extends JFrame implements IChessView  {
   public void setKeyListener(KeyListener l) {
     this.addKeyListener(l);
   }
+
+  @Override
+  public void deleteButtonListener() {
+    chessBoard.deleteButtonListener();
+  }
+
+  @Override
+  public void deleteKeyListener() {
+
+    KeyListener[] list = this.getKeyListeners();
+
+    if (list.length != 0) {
+      this.removeKeyListener(list[0]);
+    }
+
+  }
 }

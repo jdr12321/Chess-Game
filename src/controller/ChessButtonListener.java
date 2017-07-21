@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import model.ChessPieceType;
 import model.IChessModel;
 import view.IChessView;
 
@@ -47,6 +48,16 @@ public class ChessButtonListener implements ActionListener {
 
         view.setMessage(model.currentPlayer().s +"'s move.");
 
+        if ((horizTo == 1 || horizTo == 8) && model.getPieceAt(horizTo, vertTo).getType() == ChessPieceType.PAWN) {
+
+          view.deleteKeyListener();
+          view.deleteButtonListener();
+          ChessPromotingController c = new ChessPromotingController();
+          c.setModel(model);
+          c.setView(view);
+          view.setMessage("Promotion!");
+        }
+
       } catch (IllegalArgumentException iae) {
         System.out.println("Bad move");
         view.setMessage("Invalid move. Retry");
@@ -64,6 +75,7 @@ public class ChessButtonListener implements ActionListener {
     else if (model.isStaleMate()) {
       view.setMessage("Stalemate!");
     }
+
 
     view.redraw();
 

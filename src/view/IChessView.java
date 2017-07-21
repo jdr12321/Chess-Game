@@ -22,4 +22,8 @@ public interface IChessView {
   void setButtonListener(ActionListener l);
 
   void setKeyListener(KeyListener l);
+
+  void deleteButtonListener();
+
+  void deleteKeyListener();
 }

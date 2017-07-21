@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.*;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -22,6 +24,8 @@ public class ChessBoardPanel extends javax.swing.JPanel {
   private final int tileWidth = 50;
   private final IChessModel model;
   private ActionListener controller;
+
+  List<JButton> buttons = new ArrayList<>();
 
   public ChessBoardPanel(IChessModel model) {
     this.model = model;
@@ -61,21 +65,25 @@ public class ChessBoardPanel extends javax.swing.JPanel {
       }
     }
 
-    for (int i = 1; i < 9; i++) {
-      for (int j = 1; j < 9; j++) {
-        JButton b = new JButton();
-        b.setActionCommand(j + " " + i);
+    if (buttons.size() == 0) {
+      for (int i = 1; i < 9; i++) {
+        for (int j = 1; j < 9; j++) {
+          JButton b = new JButton();
+          b.setActionCommand(j + " " + i);
 //        b.setPreferredSize(new Dimension(50, 50));
 //        b.setLocation(0, 0);
-        b.setBounds((i - 1) * tileWidth, (Math.abs(j - 9) - 1) * tileWidth, tileWidth, tileWidth);
-        b.setFocusable(false);
-        b.setOpaque(false);
-        b.setContentAreaFilled(false);
-        b.setBorderPainted(false);
-        b.addActionListener(controller);
-        this.add(b);
+          b.setBounds((i - 1) * tileWidth, (Math.abs(j - 9) - 1) * tileWidth, tileWidth, tileWidth);
+          b.setFocusable(false);
+          b.setOpaque(false);
+          b.setContentAreaFilled(false);
+          b.setBorderPainted(false);
+          b.addActionListener(controller);
+          this.add(b);
+          buttons.add(b);
+        }
       }
     }
+
 
     /*JButton b = new JButton();
     b.setActionCommand("a");
@@ -87,5 +95,20 @@ public class ChessBoardPanel extends javax.swing.JPanel {
 
   public void addButtonListener(ActionListener l) {
     this.controller = l;
+    for (JButton b : buttons) {
+      b.addActionListener(l);
+    }
+  }
+
+  public void deleteButtonListener() {
+    this.controller = null;
+    for (JButton b : buttons) {
+
+      ActionListener[] al = b.getActionListeners();
+
+      if (al.length != 0) {
+        b.removeActionListener(al[0]);
+      }
+    }
   }
 }
