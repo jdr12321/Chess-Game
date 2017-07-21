@@ -9,6 +9,7 @@ import model.ChessBoard;
 import model.ChessPlayer;
 import model.IChessModel;
 
+import static model.ChessPieceType.KNIGHT;
 import static model.ChessPieceType.NONE;
 import static org.junit.Assert.assertEquals;
 
@@ -959,5 +960,45 @@ public class TestChessBoard {
 
     // but nothing can move, so stalemate
     assertEquals(model.isStaleMate(), true);
+  }
+
+  @Test
+  public void testPromotingPawns() {
+    model.startGame();
+    model.move(2, 1, 4, 1);
+    model.move(4, 1, 5, 1);
+    model.move(5, 1, 6, 1);
+    model.move(6, 1, 7, 2);
+    model.move(7, 2, 8, 1);
+
+    model.move(7, 8, 5, 8);
+    model.move(5, 8, 4, 8);
+    model.move(4, 8, 3, 8);
+    model.move(3, 8, 2, 7);
+    model.move(2, 7, 1, 8);
+
+    assertEquals(model.getState(),
+            "P+ N- B- Q- K- B- N- R- \n" +
+                    "P-    P- P- P- P- P-    \n" +
+                    "                        \n" +
+                    "                        \n" +
+                    "                        \n" +
+                    "                        \n" +
+                    "   P+ P+ P+ P+ P+    P+ \n" +
+                    "R+ N+ B+ Q+ K+ B+ N+ P- \n");
+
+    model.promote(KNIGHT);
+
+    assertEquals(model.getState(),
+            "N+ N- B- Q- K- B- N- R- \n" +
+                    "P-    P- P- P- P- P-    \n" +
+                    "                        \n" +
+                    "                        \n" +
+                    "                        \n" +
+                    "                        \n" +
+                    "   P+ P+ P+ P+ P+    P+ \n" +
+                    "R+ N+ B+ Q+ K+ B+ N+ N- \n");
+
+
   }
 }

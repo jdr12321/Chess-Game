@@ -1,7 +1,5 @@
 package controller;
 
-import java.awt.event.ActionListener;
-
 import model.IChessModel;
 import view.IChessView;
 
@@ -13,4 +11,12 @@ public interface IChessController  {
   void setModel(IChessModel model);
 
   void setView(IChessView view);
+
+  /**
+   * Created by Justin on 7/20/2017.
+   */
+  class ChessPromotingController {
+
+
+  }
 }

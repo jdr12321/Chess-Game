@@ -74,6 +74,8 @@ public class ChessBoard implements IChessModel {
 
       t.setChessPiece(new ChessPiece(type, player, ChessMoveStrategyFactory.create(type, player, this)));
     }
+
+    prevMoves = new Stack<>();
   }
 
   @Override
@@ -113,10 +115,12 @@ public class ChessBoard implements IChessModel {
   }
 
   @Override
-  public void undo() {
+  public boolean undo() {
     if (prevMoves.size() != 0) {
       tiles = prevMoves.pop();
+      return true;
     }
+    return false;
   }
 
   @Override
@@ -130,6 +134,19 @@ public class ChessBoard implements IChessModel {
     ChessPlayer temp = nextPlayer;
     nextPlayer = prevPlayer;
     prevPlayer = temp;
+  }
+
+  @Override
+  public void promote(ChessPieceType to) {
+    for (ChessTile t : tiles) {
+      ChessPiece p = getPieceAt(t.getHorizontalPosition(), t.getVerticalPosition());
+
+      if ((t.getHorizontalPosition() == 1 || t.getHorizontalPosition() == 8)
+              && p.getType() == PAWN) {
+        t.setChessPiece(new ChessPiece(to, p.getPlayer(),
+                ChessMoveStrategyFactory.create(to, p.getPlayer(), this)));
+      }
+    }
   }
 
   @Override

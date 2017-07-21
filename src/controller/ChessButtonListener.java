@@ -44,19 +44,12 @@ public class ChessButtonListener implements ActionListener {
       try {
         model.move(horizFrom, vertFrom, horizTo, vertTo);
         model.advancePlayer();
-        //view.redraw();
 
-        if (model.currentPlayer() == WHITE) {
-          view.setMessage("White's move.");
-        }
+        view.setMessage(model.currentPlayer().s +"'s move.");
 
-        else {
-          view.setMessage("Black's move.");
-        }
       } catch (IllegalArgumentException iae) {
         System.out.println("Bad move");
         view.setMessage("Invalid move. Retry");
-        //view.redraw();
       }
 
       horizFrom = 0;

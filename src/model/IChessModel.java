@@ -24,8 +24,10 @@ public interface IChessModel {
 
   /**
    * Goes back one move in time.
+   *
+   * @return true if a move is undone, or false if there isn't a move to undo.
    */
-  void undo();
+  boolean undo();
 
   /**
    * Determine who is the next player to move in the chess game.
@@ -39,6 +41,13 @@ public interface IChessModel {
    * is invoked, the next next player is returned.
    */
   void advancePlayer();
+
+  /**
+   * Promotes all pawns that can currently be promoted to the given type.
+   *
+   * @param to the desired type for those pawns to become.
+   */
+  void promote(ChessPieceType to);
 
   /**
    * Determines if the given player's king is in check.

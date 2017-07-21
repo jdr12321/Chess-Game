@@ -5,7 +5,15 @@ package model;
  */
 public enum ChessPlayer {
 
-  BLACK, WHITE, NEITHER;
+  BLACK("Black"), WHITE("White"), NEITHER("neither");
+
+  public String s;
+
+  ChessPlayer(String s) {
+    this.s = s;
+  }
+
+
 
   @Override
   public String toString() {
