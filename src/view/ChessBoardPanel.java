@@ -24,16 +24,32 @@ public class ChessBoardPanel extends javax.swing.JPanel {
   private final int tileWidth = 50;
   private final IChessModel model;
   private ActionListener controller;
+  private Point selectedSquare = null;
 
-  List<JButton> buttons = new ArrayList<>();
+  List<JButton> buttons;
 
   public ChessBoardPanel(IChessModel model) {
     this.model = model;
-    this.setPreferredSize(new Dimension(400, 450));
+    this.setPreferredSize(new Dimension(450, 450));
 
+    this.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
 
+    this.buttons = new ArrayList<>();
 
-
+    for (int i = 8; i > 0; i--) {
+      for (int j = 1; j < 9; j++) {
+        JButton b = new JButton();
+        b.setActionCommand(i + " " + j);
+        b.setPreferredSize(new Dimension(50, 50));
+        b.setFocusable(false);
+        b.setOpaque(false);
+        b.setContentAreaFilled(false);
+        b.setBorderPainted(true);
+        b.addActionListener(controller);
+        this.add(b);
+        buttons.add(b);
+      }
+    }
   }
 
   @Override
@@ -51,10 +67,25 @@ public class ChessBoardPanel extends javax.swing.JPanel {
           g.setColor(Color.WHITE);
         }
 
+        if (selectedSquare != null && j == selectedSquare.x && i == selectedSquare.y) {
+          g.setColor(Color.BLUE);
+        }
+
+        else if (selectedSquare != null
+                && model.getPieceAt(selectedSquare.x, selectedSquare.y).getMoveStrategy()
+                .canMove(selectedSquare.x, selectedSquare.y, j, i)) {
+          try {
+            model.move(selectedSquare.x, selectedSquare.y, j, i);
+            model.undo();
+            g.setColor(Color.PINK);
+          } catch (IllegalArgumentException e) {
+          }
+
+        }
+
         g.fillRect((i - 1) * tileWidth, (Math.abs(j - 9) - 1)  * tileWidth, tileWidth, tileWidth);
         g.setColor(Color.PINK);
-//        g.drawString(p.toString(), (i - 1) * tileWidth + tileWidth / 2,
-//                (Math.abs(j - 9) - 1) * tileWidth + tileWidth / 2);
+
         try {
           g.drawImage(ImageIO.read(new File(p.toString() + ".png")), (i - 1) * tileWidth,
                 (Math.abs(j - 9) - 1) * tileWidth, tileWidth, tileWidth, this);
@@ -65,32 +96,25 @@ public class ChessBoardPanel extends javax.swing.JPanel {
       }
     }
 
-    if (buttons.size() == 0) {
-      for (int i = 1; i < 9; i++) {
-        for (int j = 1; j < 9; j++) {
-          JButton b = new JButton();
-          b.setActionCommand(j + " " + i);
-//        b.setPreferredSize(new Dimension(50, 50));
-//        b.setLocation(0, 0);
-          b.setBounds((i - 1) * tileWidth, (Math.abs(j - 9) - 1) * tileWidth, tileWidth, tileWidth);
-          b.setFocusable(false);
-          b.setOpaque(false);
-          b.setContentAreaFilled(false);
-          b.setBorderPainted(false);
-          b.addActionListener(controller);
-          this.add(b);
-          buttons.add(b);
-        }
-      }
-    }
-
-
-    /*JButton b = new JButton();
-    b.setActionCommand("a");
-    b.setLocation(0, 0);
-    b.setBounds(0, 0, 50, 50);
-    b.addActionListener(this);
-    this.add(b);*/
+//    if (buttons.size() == 0) {
+//      for (int i = 1; i < 9; i++) {
+//        for (int j = 1; j < 9; j++) {
+//          JButton b = new JButton();
+//          b.setActionCommand(j + " " + i);
+//        //b.setPreferredSize(new Dimension(50, 50));
+//        //b.setLocation((i - 1) * tileWidth, (Math.abs(j - 9) - 1) * tileWidth);
+//          b.setBounds((i - 1) * tileWidth, (Math.abs(j - 9) - 1) * tileWidth, tileWidth, tileWidth);
+//          b.setSize(new Dimension(50, 50));
+//          b.setFocusable(false);
+//          b.setOpaque(false);
+//          b.setContentAreaFilled(false);
+//          b.setBorderPainted(true);
+//          b.addActionListener(controller);
+//          this.add(b);
+//          buttons.add(b);
+//        }
+//      }
+//    }
   }
 
   public void addButtonListener(ActionListener l) {
@@ -110,5 +134,13 @@ public class ChessBoardPanel extends javax.swing.JPanel {
         b.removeActionListener(al[0]);
       }
     }
+  }
+
+  public void setSelectedSquare(Point p) {
+    selectedSquare = p;
+  }
+
+  public Point getSelectedSquare() {
+    return selectedSquare;
   }
 }

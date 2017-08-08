@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,9 +31,11 @@ public class ChessButtonListener implements ActionListener {
     String s = e.getActionCommand();
     int horiz = Integer.parseInt(s.substring(0, 1));
     int vert = Integer.parseInt(s.substring(2, 3));
-    if (horizFrom == 0 && model.getPieceAt(horiz, vert).getPlayer() == model.currentPlayer()) {
+    if (model.getPieceAt(horiz, vert).getPlayer() == model.currentPlayer()) {
       horizFrom = horiz;
       vertFrom = vert;
+
+      view.setSelectedSquare(new Point(horiz, vert));
     }
     else if (horizFrom != 0 && horizTo == 0) {
       horizTo = horiz;
@@ -58,15 +61,20 @@ public class ChessButtonListener implements ActionListener {
           view.setMessage("Promotion!");
         }
 
+        if (model.isInCheck(model.currentPlayer())) {
+          view.setMessage("Check!");
+        }
+
       } catch (IllegalArgumentException iae) {
         System.out.println("Bad move");
-        view.setMessage("Invalid move. Retry");
+        view.setMessage(iae.getMessage() + " Retry.");
       }
 
       horizFrom = 0;
       vertFrom = 0;
       horizTo = 0;
       vertTo = 0;
+      view.setSelectedSquare(null);
     }
 
     if (model.isGameOver()) {

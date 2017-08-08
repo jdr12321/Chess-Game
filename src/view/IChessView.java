@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 
@@ -18,6 +19,10 @@ public interface IChessView {
   void setMessage(String message);
 
   void redraw();
+
+  void setSelectedSquare(Point p);
+
+  Point getSelectedSquare();
 
   void setButtonListener(ActionListener l);
 

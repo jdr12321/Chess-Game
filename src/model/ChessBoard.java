@@ -103,12 +103,12 @@ public class ChessBoard implements IChessModel {
 
     }
     else {
-      throw new IllegalArgumentException("Cannot move piece this way.");
+      throw new IllegalArgumentException("Cannot move this way.");
     }
 
     if (isInCheck(pieceFrom.getPlayer())) {
       undo();
-      throw new IllegalArgumentException("This move put the king in check, cannot move");
+      throw new IllegalArgumentException("The king is in check.");
     }
 
 

@@ -17,7 +17,7 @@ public class ChessMessagePanel extends javax.swing.JPanel {
   String message = "White's move.";
 
   public ChessMessagePanel() {
-    this.setPreferredSize(new Dimension(400, 100));
+    this.setPreferredSize(new Dimension(450, 100));
   }
 
   public void setMessage(String message) {

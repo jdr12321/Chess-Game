@@ -21,8 +21,9 @@ public class ChessBoardFrame extends JFrame implements IChessView  {
   ChessMessagePanel messages;
 
   public ChessBoardFrame(IChessModel model) {
+    this.setTitle("Chess Game");
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    this.setSize(new Dimension(400, 550));
+    this.setSize(new Dimension(450, 550));
     this.setResizable(false);
     this.chessBoard = new ChessBoardPanel(model);
     this.add(chessBoard);
@@ -51,6 +52,16 @@ public class ChessBoardFrame extends JFrame implements IChessView  {
     this.repaint();
     chessBoard.repaint();
     messages.repaint();
+  }
+
+  @Override
+  public void setSelectedSquare(Point p) {
+    this.chessBoard.setSelectedSquare(p);
+  }
+
+  @Override
+  public Point getSelectedSquare() {
+    return chessBoard.getSelectedSquare();
   }
 
   @Override
