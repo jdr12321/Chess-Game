@@ -12,12 +12,23 @@ public class ChessTile {
   private final int verticalPosition;
   ChessPiece piece;
 
+  /**
+   * Builds an empty chess tile with no piece with the designated coordinates
+   * @param horizontalPosition the x position
+   * @param verticalPosition the y position
+   */
   public ChessTile(int horizontalPosition, int verticalPosition) {
     this.horizontalPosition = horizontalPosition;
     this.verticalPosition = verticalPosition;
     this.piece = new ChessPiece(NONE, NEITHER, null);
   }
 
+  /**
+   * Builds a chess tile with the designated coordinates holding the designated piece
+   * @param horizontalPosition the x position
+   * @param verticalPosition the y position
+   * @param piece the piece for the tile to start with
+   */
   public ChessTile(int horizontalPosition, int verticalPosition, ChessPiece piece) {
     this(horizontalPosition, verticalPosition);
     this.piece = piece;

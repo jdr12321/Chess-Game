@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by Justin on 7/11/2017.
+ * Piece type enumeration
  */
 public enum ChessPieceType {
 

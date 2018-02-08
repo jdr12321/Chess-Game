@@ -11,7 +11,7 @@ import static model.ChessPieceType.*;
 import static model.ChessPlayer.*;
 
 /**
- * Created by Justin on 7/11/2017.
+ * Implementation of a chess board based on standard chess rules.
  */
 public class ChessBoard implements IChessModel {
 
@@ -21,6 +21,10 @@ public class ChessBoard implements IChessModel {
   private ChessPlayer nextPlayer;
   private ChessPlayer prevPlayer;
 
+  /**
+   * Default chess board constructor. Builds an empty board with no tiles, sets white to first
+   * player
+   */
   public ChessBoard() {
     for (int i = 1; i <= 8; i++) {
       for (int j = 1; j <= 8; j++) {
@@ -185,6 +189,7 @@ public class ChessBoard implements IChessModel {
     }*/
 
     if (!t.getChessPiece().getMoveStrategy().cantMoveAtAll(kingHoriz, kingVert)) {
+      System.out.println("King can move");
       return false;
     }
 
@@ -199,7 +204,12 @@ public class ChessBoard implements IChessModel {
       ChessTile aggressingTile = aggressors.get(0);
       // can the aggressing piece get taken this turn?
       if (spotInCheckBy(aggressingTile.getHorizontalPosition(),
-              aggressingTile.getVerticalPosition(), nextPlayer, true)) {
+              aggressingTile.getVerticalPosition(), nextPlayer, false)
+              || (spotInCheckBy(aggressingTile.getHorizontalPosition(),
+              aggressingTile.getVerticalPosition(), nextPlayer, true)
+      && !spotInCheckBy(aggressingTile.getHorizontalPosition(),
+              aggressingTile.getVerticalPosition(), currentPlayer(), true))) {
+        System.out.println("aggressing piece can be taken");
         return false;
       }
 
@@ -269,6 +279,12 @@ public class ChessBoard implements IChessModel {
     return acc;
   }
 
+  /**
+   * returns the tile with the given coordinates
+   * @param horiz desired x position
+   * @param vert desired y position
+   * @return the tile structure with coordinates horiz and vert
+   */
   private ChessTile getTileAt(int horiz, int vert) {
     for (ChessTile t : tiles) {
       if (t.getHorizontalPosition() == horiz
@@ -279,6 +295,15 @@ public class ChessBoard implements IChessModel {
     throw new IllegalArgumentException("Piece not found");
   }
 
+  /**
+   * Checks if the given tile is in "check" by the given player, meaning they contain a piece that
+   * can move to it.
+   * @param horiz the x position in question
+   * @param vert the y position in question
+   * @param player the player whose pieces will be checked
+   * @param kingCanCheck if true, then the player's king can be the piece to move there
+   * @return
+   */
   private boolean spotInCheckBy(int horiz, int vert, ChessPlayer player, boolean kingCanCheck) {
     for (ChessTile t : tiles) {
       ChessPiece p = t.getChessPiece();
@@ -292,6 +317,11 @@ public class ChessBoard implements IChessModel {
     return false;
   }
 
+  /**
+   * Returns the location of the king on the board matching the player's color
+   * @param player the player color of king desired
+   * @return the tile that the king is on.
+   */
   private ChessTile spotOfKing(ChessPlayer player) {
     for (ChessTile t : tiles) {
       ChessPiece p = t.getChessPiece();
@@ -302,6 +332,14 @@ public class ChessBoard implements IChessModel {
     return null;
   }
 
+  /**
+   * Collects all tiles that currently contain pieces of the given player's color
+   * that can move to this position.
+   * @param horiz the x coordinate of this position
+   * @param vert the y coordinate of this position
+   * @param player the player to find pieces for
+   * @return a list of all chess tiles satisfying this condition
+   */
   private List<ChessTile> collectAggressingTiles(int horiz, int vert, ChessPlayer player) {
 
     List<ChessTile> acc = new ArrayList<>();

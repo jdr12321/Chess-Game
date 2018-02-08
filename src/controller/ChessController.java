@@ -11,7 +11,7 @@ import view.IChessView;
 import static model.ChessPlayer.WHITE;
 
 /**
- * Created by Justin on 7/19/2017.
+ * Controller part of MVC pattern, handles interactions between view and model for most gameplay
  */
 public class ChessController implements IChessController {
 
@@ -21,6 +21,10 @@ public class ChessController implements IChessController {
   ChessButtonListener buttonListener = new ChessButtonListener();
   ChessKeyListener keyListener = new ChessKeyListener();
 
+  /**
+   * Default constructor, for most of game only two commands supported are n for new game, u for
+   * undo move
+   */
   public ChessController() {
     keyListener.addCommand(KeyEvent.VK_U, new UndoCommand());
     keyListener.addCommand(KeyEvent.VK_N, new NewGameCommand());

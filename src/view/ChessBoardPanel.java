@@ -17,7 +17,8 @@ import model.ChessPiece;
 import model.IChessModel;
 
 /**
- * Created by Justin on 7/17/2017.
+ * Chess board panel section of view. Manages strictly the gameplay board part of the frame, not the
+ * message section.
  */
 public class ChessBoardPanel extends javax.swing.JPanel {
 
@@ -28,6 +29,10 @@ public class ChessBoardPanel extends javax.swing.JPanel {
 
   List<JButton> buttons;
 
+  /**
+   * Initializes this panel linked to the given Chess board model
+   * @param model the model to link interactions with this view to.
+   */
   public ChessBoardPanel(IChessModel model) {
     this.model = model;
     this.setPreferredSize(new Dimension(450, 450));
@@ -71,9 +76,8 @@ public class ChessBoardPanel extends javax.swing.JPanel {
           g.setColor(Color.BLUE);
         }
 
-        else if (selectedSquare != null
-                && model.getPieceAt(selectedSquare.x, selectedSquare.y).getMoveStrategy()
-                .canMove(selectedSquare.x, selectedSquare.y, j, i)) {
+        else if (selectedSquare != null) {
+//
           try {
             model.move(selectedSquare.x, selectedSquare.y, j, i);
             model.undo();
@@ -96,27 +100,12 @@ public class ChessBoardPanel extends javax.swing.JPanel {
       }
     }
 
-//    if (buttons.size() == 0) {
-//      for (int i = 1; i < 9; i++) {
-//        for (int j = 1; j < 9; j++) {
-//          JButton b = new JButton();
-//          b.setActionCommand(j + " " + i);
-//        //b.setPreferredSize(new Dimension(50, 50));
-//        //b.setLocation((i - 1) * tileWidth, (Math.abs(j - 9) - 1) * tileWidth);
-//          b.setBounds((i - 1) * tileWidth, (Math.abs(j - 9) - 1) * tileWidth, tileWidth, tileWidth);
-//          b.setSize(new Dimension(50, 50));
-//          b.setFocusable(false);
-//          b.setOpaque(false);
-//          b.setContentAreaFilled(false);
-//          b.setBorderPainted(true);
-//          b.addActionListener(controller);
-//          this.add(b);
-//          buttons.add(b);
-//        }
-//      }
-//    }
   }
 
+  /**
+   * Links a listener for commands to every button on this board
+   * @param l the action listener
+   */
   public void addButtonListener(ActionListener l) {
     this.controller = l;
     for (JButton b : buttons) {
@@ -124,6 +113,9 @@ public class ChessBoardPanel extends javax.swing.JPanel {
     }
   }
 
+  /**
+   * Deletes the listener currently linked to all buttons on this board
+   */
   public void deleteButtonListener() {
     this.controller = null;
     for (JButton b : buttons) {
@@ -136,10 +128,19 @@ public class ChessBoardPanel extends javax.swing.JPanel {
     }
   }
 
+  /**
+   * Sets the square at the given point as the selected square, meaning it will glow a different
+   * color
+   * @param p the point to designate the current selected square
+   */
   public void setSelectedSquare(Point p) {
     selectedSquare = p;
   }
 
+  /**
+   * returns the currently selected square
+   * @return the private field holding the selected square
+   */
   public Point getSelectedSquare() {
     return selectedSquare;
   }

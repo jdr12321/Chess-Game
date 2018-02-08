@@ -12,12 +12,16 @@ import model.IChessModel;
 import static model.ChessPieceType.NONE;
 
 /**
- * Created by Justin on 7/11/2017.
+ * Contains moving rules for a black pawn
  */
 public class BlackPawnMoveStrategy implements IChessMoveStrategy {
 
   IChessModel model;
 
+  /**
+   * Constructs this object containing the model of the chess board for it to judge moves against
+   * @param model the chess board to examine for valid moves
+   */
   public BlackPawnMoveStrategy(IChessModel model) {
     this.model = model;
   }
@@ -46,7 +50,7 @@ public class BlackPawnMoveStrategy implements IChessMoveStrategy {
     }
 
     if (horizFrom == 7 && vertFrom == vertTo && horizTo == horizFrom - 2
-            && pieceAtTo.getType().equals(NONE)) {
+            && pieceAtTo.getType().equals(NONE) && model.getPieceAt(horizFrom - 1, vertTo).getType().equals(NONE)) {
       return true;
     }
 

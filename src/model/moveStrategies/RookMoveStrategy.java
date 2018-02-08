@@ -12,12 +12,16 @@ import model.IChessModel;
 import static model.ChessPieceType.NONE;
 
 /**
- * Created by Justin on 7/11/2017.
+ * Contains moving rules for a rook
  */
 public class RookMoveStrategy implements IChessMoveStrategy {
 
   IChessModel model;
 
+  /**
+   * Constructs this object containing the model of the chess board for it to judge moves against
+   * @param model the chess board to examine for valid moves
+   */
   public RookMoveStrategy(IChessModel model) {
     this.model = model;
   }

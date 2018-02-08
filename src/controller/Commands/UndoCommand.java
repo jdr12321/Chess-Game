@@ -4,7 +4,7 @@ import model.IChessModel;
 import view.IChessView;
 
 /**
- * Created by Justin on 7/20/2017.
+ * Undoes the last move on the board
  */
 public class UndoCommand implements KeyCommand {
 

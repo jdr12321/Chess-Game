@@ -6,13 +6,17 @@ import java.util.List;
 import model.IChessModel;
 
 /**
- * Created by Justin on 7/11/2017.
+ * Contains moving rules for a queen
  */
 public class QueenMoveStrategy implements IChessMoveStrategy {
 
   private final RookMoveStrategy rookMoveStrategy;
   private final BishopMoveStrategy bishopMoveStrategy;
 
+  /**
+   * Constructs this object containing the model of the chess board for it to judge moves against
+   * @param model the chess board to examine for valid moves
+   */
   public QueenMoveStrategy(IChessModel model) {
     this.rookMoveStrategy = new RookMoveStrategy(model);
     this.bishopMoveStrategy = new BishopMoveStrategy(model);

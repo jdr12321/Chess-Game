@@ -1,7 +1,7 @@
 package model;
 
 /**
- * Created by Justin on 7/11/2017.
+ * Chess player enumeration
  */
 public enum ChessPlayer {
 
@@ -9,6 +9,10 @@ public enum ChessPlayer {
 
   public String s;
 
+  /**
+   * Constructs a chess player with a string representation of its color
+   * @param s the string representation
+   */
   ChessPlayer(String s) {
     this.s = s;
   }

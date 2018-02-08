@@ -12,12 +12,16 @@ import model.IChessModel;
 import static model.ChessPieceType.NONE;
 
 /**
- * Created by Justin on 7/11/2017.
+ * Contains moving rules for a bishop
  */
 public class BishopMoveStrategy implements IChessMoveStrategy {
 
   IChessModel model;
 
+  /**
+   * Constructs this object containing the model of the chess board for it to judge moves against
+   * @param model the chess board to examine for valid moves
+   */
   public BishopMoveStrategy(IChessModel model) {
     this.model = model;
   }
@@ -63,16 +67,6 @@ public class BishopMoveStrategy implements IChessMoveStrategy {
 
   @Override
   public boolean cantMoveAtAll(int horiz, int vert) {
-    /*ChessPlayer bishopPlayer = model.getPieceAt(horiz, vert).getPlayer();
-    ChessPiece topRight = model.getPieceAt(horiz + 1, vert + 1);
-    ChessPiece topLeft = model.getPieceAt(horiz + 1, vert - 1);
-    ChessPiece bottomLeft = model.getPieceAt(horiz - 1, vert - 1);
-    ChessPiece bottomRight = model.getPieceAt(horiz - 1, vert + 1);
-
-    return (topRight == null || topRight.getPlayer() == bishopPlayer)
-            && (topLeft == null || topLeft.getPlayer() == bishopPlayer)
-            && (bottomLeft == null || bottomLeft.getPlayer() == bishopPlayer)
-            && (bottomRight == null || bottomRight.getPlayer() == bishopPlayer);*/
 
     for (int i = -1; i <= 1; i += 2) {
       for (int j = -1; j <= 1; j += 2) {

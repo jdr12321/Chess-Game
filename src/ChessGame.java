@@ -6,7 +6,7 @@ import view.ChessBoardFrame;
 import view.IChessView;
 
 /**
- * Created by Justin on 7/17/2017.
+ * Main chess game class
  */
 public class ChessGame {
 

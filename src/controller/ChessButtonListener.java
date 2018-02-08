@@ -13,7 +13,8 @@ import view.IChessView;
 import static model.ChessPlayer.WHITE;
 
 /**
- * Created by Justin on 7/20/2017.
+ * Action listener implementation for chess buttons. Handles all the actions when a button is pressed
+ * on a chess view
  */
 public class ChessButtonListener implements ActionListener {
 
@@ -44,7 +45,6 @@ public class ChessButtonListener implements ActionListener {
 
     if (horizTo != 0) {
 
-      System.out.println("Move attempted");
       try {
         model.move(horizFrom, vertFrom, horizTo, vertTo);
         model.advancePlayer();
@@ -66,7 +66,7 @@ public class ChessButtonListener implements ActionListener {
         }
 
       } catch (IllegalArgumentException iae) {
-        System.out.println("Bad move");
+
         view.setMessage(iae.getMessage() + " Retry.");
       }
 
@@ -87,10 +87,6 @@ public class ChessButtonListener implements ActionListener {
 
     view.redraw();
 
-    System.out.println(horizFrom);
-    System.out.println(vertFrom);
-    System.out.println(horizTo);
-    System.out.println(vertTo);
 
   }
 

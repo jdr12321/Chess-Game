@@ -5,7 +5,7 @@ import model.IChessModel;
 import view.IChessView;
 
 /**
- * Created by Justin on 7/20/2017.
+ * Command sets the game start back to a starting one
  */
 public class NewGameCommand implements KeyCommand {
 

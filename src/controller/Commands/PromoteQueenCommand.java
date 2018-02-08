@@ -8,7 +8,7 @@ import model.IChessModel;
 import view.IChessView;
 
 /**
- * Created by Justin on 7/21/2017.
+ * Command designates a pawn to be promoted to a queen
  */
 public class PromoteQueenCommand implements KeyCommand {
 

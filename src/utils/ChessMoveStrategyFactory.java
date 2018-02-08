@@ -13,10 +13,17 @@ import model.moveStrategies.RookMoveStrategy;
 import model.moveStrategies.WhitePawnMoveStrategy;
 
 /**
- * Created by Justin on 7/11/2017.
+ * IChessMoveStrategy factory, giving chess types and players their moving rules
  */
 public class ChessMoveStrategyFactory {
 
+  /**
+   * Creates the appropriate chess move rule set for a given chess type and player and chess board.
+   * @param type the type of piece
+   * @param player the player color of the piece
+   * @param model the chess board to store inside the piece for valid move checks
+   * @return the IChessMoveStategy structure appropriate for the type and player.
+   */
   public static IChessMoveStrategy create(ChessPieceType type, ChessPlayer player, IChessModel model) {
     switch (type) {
       case PAWN:

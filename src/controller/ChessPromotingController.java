@@ -11,7 +11,8 @@ import model.IChessModel;
 import view.IChessView;
 
 /**
- * Created by Justin on 7/20/2017.
+ * Controller specifically for time when a pawn needs to be promoted. Disables other actions while
+ * user input on what to promote the piece to is waited for.
  */
 public class ChessPromotingController implements IChessController {
 
@@ -20,6 +21,10 @@ public class ChessPromotingController implements IChessController {
 
   ChessKeyListener keyListener = new ChessKeyListener();
 
+  /**
+   * Default constructor, contains key press commands for n, r, q, b for different possible
+   * promotions
+   */
   public ChessPromotingController() {
     keyListener.addCommand(KeyEvent.VK_N, new PromoteKnightCommand());
     keyListener.addCommand(KeyEvent.VK_R, new PromoteRookCommand());

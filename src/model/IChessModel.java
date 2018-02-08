@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * Model containing all supported operations of chess boards.
  */

@@ -12,12 +12,16 @@ import static model.ChessPieceType.NONE;
 import static model.ChessPlayer.NEITHER;
 
 /**
- * Created by Justin on 7/11/2017.
+ * Contains moving rules for a king
  */
 public class KingMoveStrategy implements IChessMoveStrategy {
 
   IChessModel model;
 
+  /**
+   * Constructs this object containing the model of the chess board for it to judge moves against
+   * @param model the chess board to examine for valid moves
+   */
   public KingMoveStrategy(IChessModel model) {
     this.model = model;
   }
