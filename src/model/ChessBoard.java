@@ -76,7 +76,8 @@ public class ChessBoard implements IChessModel {
         type = NONE;
       }
 
-      t.setChessPiece(new ChessPiece(type, player, ChessMoveStrategyFactory.create(type, player, this)));
+      t.setChessPiece(new ChessPiece(type, player,
+              ChessMoveStrategyFactory.create(type, player, this)));
     }
 
     prevMoves = new Stack<>();
@@ -96,15 +97,14 @@ public class ChessBoard implements IChessModel {
 
       List<ChessTile> copy = new ArrayList<>();
       for (ChessTile t : tiles) {
-        copy.add(new ChessTile(t.getHorizontalPosition(), t.getVerticalPosition(), t.getChessPiece()));
+        copy.add(new ChessTile(t.getHorizontalPosition(), t.getVerticalPosition(),
+                t.getChessPiece()));
       }
 
       prevMoves.add(copy);
 
       tileFrom.setChessPiece(new ChessPiece(NONE, NEITHER, null));
       tileTo.setChessPiece(pieceFrom);
-
-
     }
     else {
       throw new IllegalArgumentException("Cannot move this way.");
@@ -129,7 +129,6 @@ public class ChessBoard implements IChessModel {
 
   @Override
   public ChessPlayer currentPlayer() {
-
     return nextPlayer;
   }
 
@@ -156,8 +155,6 @@ public class ChessBoard implements IChessModel {
   @Override
   public boolean isInCheck(ChessPlayer player) {
 
-
-
     ChessTile t = spotOfKing(player);
 
     int kingHoriz = t.getHorizontalPosition();
@@ -178,18 +175,7 @@ public class ChessBoard implements IChessModel {
     int kingVert = t.getVerticalPosition();
 
     // Can the king move out of check himself?
-    /*for (int i = -1; i < 2; i++) {
-      for (int j = -1; j < 2; j++) {
-        if (kingHoriz + i > 0 && kingVert + j > 0
-                && getPieceAt(kingHoriz + i, kingVert + j).getPlayer().equals(NEITHER)
-                 && !spotInCheckBy(kingHoriz + i, kingVert + j, prevPlayer, true)) {
-          return false;
-        }
-      }
-    }*/
-
     if (!t.getChessPiece().getMoveStrategy().cantMoveAtAll(kingHoriz, kingVert)) {
-      System.out.println("King can move");
       return false;
     }
 
@@ -207,9 +193,8 @@ public class ChessBoard implements IChessModel {
               aggressingTile.getVerticalPosition(), nextPlayer, false)
               || (spotInCheckBy(aggressingTile.getHorizontalPosition(),
               aggressingTile.getVerticalPosition(), nextPlayer, true)
-      && !spotInCheckBy(aggressingTile.getHorizontalPosition(),
+              && !spotInCheckBy(aggressingTile.getHorizontalPosition(),
               aggressingTile.getVerticalPosition(), currentPlayer(), true))) {
-        System.out.println("aggressing piece can be taken");
         return false;
       }
 

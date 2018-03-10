@@ -17,7 +17,7 @@ import static model.ChessPieceType.QUEEN;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Justin on 7/11/2017.
+ * Tests of logic behind chess game
  */
 public class TestChessBoard {
 
@@ -905,6 +905,8 @@ public class TestChessBoard {
                     "                        \n" +
                     "P+ P+ P+ P+ P+ P+ P+ P+ \n" +
                     "R+ N+ B+ Q+ K+ B+ N+ R+ \n");
+
+    // cannot undo at start state with no moves
     model.undo();
     assertEquals(model.getState(),
             "R- N- B- Q- K- B- N- R- \n" +

@@ -22,6 +22,7 @@ import model.IChessModel;
  */
 public class ChessBoardPanel extends javax.swing.JPanel {
 
+  private final Color tanTile = new Color(222, 184, 135);
   private final int tileWidth = 50;
   private final IChessModel model;
   private ActionListener controller;
@@ -60,53 +61,52 @@ public class ChessBoardPanel extends javax.swing.JPanel {
   @Override
   public void paintComponent(Graphics g) {
 
-    for (int i = 1; i < 9; i++) {
-      for (int j = 1; j < 9; j++) {
+    for (int y = 1; y < 9; y++) {
+      for (int x = 1; x < 9; x++) {
 
+        ChessPiece p = model.getPieceAt(x, y);
 
-        ChessPiece p = model.getPieceAt(j, i);
-
-        if (i % 2 == j % 2) {
-          g.setColor(new Color(222, 184, 135));
+        if (y % 2 == x % 2) {
+          g.setColor(tanTile);
         } else {
           g.setColor(Color.WHITE);
         }
 
-        if (selectedSquare != null && j == selectedSquare.x && i == selectedSquare.y) {
+        // paint any selected square blue
+        if (selectedSquare != null && x == selectedSquare.x && y == selectedSquare.y) {
           g.setColor(Color.BLUE);
         }
 
+        // if a piece is selected, paint all pieces it can move to pink
         else if (selectedSquare != null) {
-//
           try {
-            model.move(selectedSquare.x, selectedSquare.y, j, i);
+            model.move(selectedSquare.x, selectedSquare.y, x, y);
             model.undo();
             g.setColor(Color.PINK);
           } catch (IllegalArgumentException e) {
+            // do not change the color from the default color, the piece is not
+            // selected and cannot be moven to from the selected
           }
 
         }
 
-        g.fillRect((i - 1) * tileWidth, (Math.abs(j - 9) - 1)  * tileWidth, tileWidth, tileWidth);
-        g.setColor(Color.PINK);
+        g.fillRect((y - 1) * tileWidth, (Math.abs(x - 9) - 1)  * tileWidth, tileWidth, tileWidth);
 
         try {
-          g.drawImage(ImageIO.read(new File(p.toString() + ".png")), (i - 1) * tileWidth,
-                (Math.abs(j - 9) - 1) * tileWidth, tileWidth, tileWidth, this);
+          g.drawImage(ImageIO.read(new File(p.toString() + ".png")), (y - 1) * tileWidth,
+                (Math.abs(x - 9) - 1) * tileWidth, tileWidth, tileWidth, this);
         } catch (IOException e) {
+          // just dont draw the piece
         }
-
-
       }
     }
-
   }
 
   /**
    * Links a listener for commands to every button on this board
    * @param l the action listener
    */
-  public void addButtonListener(ActionListener l) {
+  void addButtonListener(ActionListener l) {
     this.controller = l;
     for (JButton b : buttons) {
       b.addActionListener(l);
@@ -116,7 +116,7 @@ public class ChessBoardPanel extends javax.swing.JPanel {
   /**
    * Deletes the listener currently linked to all buttons on this board
    */
-  public void deleteButtonListener() {
+  void deleteButtonListener() {
     this.controller = null;
     for (JButton b : buttons) {
 
@@ -133,15 +133,8 @@ public class ChessBoardPanel extends javax.swing.JPanel {
    * color
    * @param p the point to designate the current selected square
    */
-  public void setSelectedSquare(Point p) {
+  void setSelectedSquare(Point p) {
     selectedSquare = p;
   }
 
-  /**
-   * returns the currently selected square
-   * @return the private field holding the selected square
-   */
-  public Point getSelectedSquare() {
-    return selectedSquare;
-  }
 }

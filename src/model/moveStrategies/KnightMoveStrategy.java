@@ -60,24 +60,6 @@ public class KnightMoveStrategy implements IChessMoveStrategy {
 
   @Override
   public boolean cantMoveAtAll(int horiz, int vert) {
-    /*ChessPlayer knightPlayer = model.getPieceAt(horiz, vert).getPlayer();
-    ChessPiece upRight = model.getPieceAt(horiz + 2, vert + 1);
-    ChessPiece rightUp = model.getPieceAt(horiz + 1, vert + 2);
-    ChessPiece upLeft = model.getPieceAt(horiz + 2, vert - 1);
-    ChessPiece leftUp = model.getPieceAt(horiz + 1, vert - 2);
-    ChessPiece downRight = model.getPieceAt(horiz - 2, vert + 1);
-    ChessPiece rightDown = model.getPieceAt(horiz - 1, vert + 2);
-    ChessPiece downLeft = model.getPieceAt(horiz - 2, vert - 1);
-    ChessPiece leftDown = model.getPieceAt(horiz - 1, vert - 2);
-
-    return (upRight == null || upRight.getPlayer() == knightPlayer)
-            && (rightUp == null || rightUp.getPlayer() == knightPlayer)
-            && (upLeft == null || upLeft.getPlayer() == knightPlayer)
-            && (leftUp == null || leftUp.getPlayer() == knightPlayer)
-            && (downRight == null || downRight.getPlayer() == knightPlayer)
-            && (rightDown == null || rightDown.getPlayer() == knightPlayer)
-            && (downLeft == null || downLeft.getPlayer() == knightPlayer)
-            && (leftDown == null || leftDown.getPlayer() == knightPlayer);*/
 
     try {
       model.move(horiz, vert, horiz + 2, vert + 1);

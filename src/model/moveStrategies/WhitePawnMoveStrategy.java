@@ -64,12 +64,6 @@ public class WhitePawnMoveStrategy implements IChessMoveStrategy {
 
   @Override
   public boolean cantMoveAtAll(int horiz, int vert) {
-    /*ChessPiece topLeft = model.getPieceAt(horiz + 1, vert - 1);
-    ChessPiece top = model.getPieceAt(horiz + 1, vert);
-    ChessPiece topRight = model.getPieceAt(horiz + 1, vert + 1);
-
-    return (horiz == 8) || (top.getType() != NONE && (vert == 1 || topLeft.getPlayer() != ChessPlayer.BLACK)
-    && (vert == 8 || topRight.getPlayer() != ChessPlayer.BLACK));*/
 
     for (int i = -1; i <= 1; i++) {
       try {

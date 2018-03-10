@@ -20,6 +20,11 @@ public class ChessKeyListener implements KeyListener {
 
   Map<Integer, KeyCommand> allCommands = new HashMap<Integer, KeyCommand>();
 
+  /**
+   * Add a command to be supported by this listener and executed on a certain key press
+   * @param code number representing the key press to execute this command
+   * @param command the command to execute on the key press
+   */
   public void addCommand(int code, KeyCommand command) {
     allCommands.put(code, command);
   }
@@ -49,7 +54,6 @@ public class ChessKeyListener implements KeyListener {
 
   @Override
   public void keyPressed(KeyEvent e) {
-
 
     KeyCommand command = allCommands.get(e.getKeyCode());
 

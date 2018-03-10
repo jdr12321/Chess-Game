@@ -43,12 +43,6 @@ public interface IChessView {
   void setSelectedSquare(Point p);
 
   /**
-   * returns the currently selected square
-   * @return the private field holding the selected square
-   */
-  Point getSelectedSquare();
-
-  /**
    * Sets a listener to all buttons on this board. Any button presses will be handled by
    * the given listener
    * @param l the listener

@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by Justin on 7/14/2017.
+ * Tests of logic behind chess piece movements
  */
 public class TestChessStrategies {
 

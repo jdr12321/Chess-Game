@@ -25,11 +25,6 @@ public class QueenMoveStrategy implements IChessMoveStrategy {
   @Override
   public boolean canMove(int horizFrom, int vertFrom, int horizTo, int vertTo) {
 
-    if (horizFrom < 1 || vertFrom < 1 || horizTo < 1 || vertTo < 1
-            || horizFrom > 8 || vertFrom > 8 || horizTo > 8 || vertTo > 8) {
-      return false;
-    }
-
     return rookMoveStrategy.canMove(horizFrom, vertFrom, horizTo, vertTo)
             || bishopMoveStrategy.canMove(horizFrom, vertFrom, horizTo, vertTo);
   }

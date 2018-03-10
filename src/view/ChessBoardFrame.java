@@ -65,11 +65,6 @@ public class ChessBoardFrame extends JFrame implements IChessView  {
   }
 
   @Override
-  public Point getSelectedSquare() {
-    return chessBoard.getSelectedSquare();
-  }
-
-  @Override
   public void setButtonListener(ActionListener l) {
     chessBoard.addButtonListener(l);
   }

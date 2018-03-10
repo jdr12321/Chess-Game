@@ -1,7 +1,5 @@
 package controller.Commands;
 
-import java.security.Key;
-
 import controller.ChessController;
 import model.ChessPieceType;
 import model.IChessModel;

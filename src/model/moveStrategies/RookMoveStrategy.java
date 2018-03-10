@@ -45,9 +45,6 @@ public class RookMoveStrategy implements IChessMoveStrategy {
       return false;
     }
 
-    int deltaHoriz = Math.abs(horizFrom - horizTo);
-    int deltaVert = Math.abs(vertFrom - vertTo);
-
     if (horizFrom == horizTo) {
       if (vertFrom < vertTo) {
         for (int i = vertFrom + 1; i < vertTo; i++) {
@@ -96,16 +93,6 @@ public class RookMoveStrategy implements IChessMoveStrategy {
 
   @Override
   public boolean cantMoveAtAll(int horiz, int vert) {
-    /*ChessPlayer rookPlayer = model.getPieceAt(horiz, vert).getPlayer();
-    ChessPiece top = model.getPieceAt(horiz + 1, vert);
-    ChessPiece bottom = model.getPieceAt(horiz - 1, vert);
-    ChessPiece left = model.getPieceAt(horiz, vert - 1);
-    ChessPiece right = model.getPieceAt(horiz, vert + 1);
-
-    return (top == null || top.getPlayer() == rookPlayer)
-            && (right == null || right.getPlayer() == rookPlayer)
-            && (left == null || left.getPlayer() == rookPlayer)
-            && (bottom == null || bottom.getPlayer() == rookPlayer);*/
 
     try {
       model.move(horiz, vert, horiz, vert + 1);
@@ -146,9 +133,6 @@ public class RookMoveStrategy implements IChessMoveStrategy {
   public List<Point> lineOfSight(int horizFrom, int vertFrom, int horizTo, int vertTo) {
 
     List<Point> acc = new ArrayList<>();
-
-    int deltaHoriz = Math.abs(horizFrom - horizTo);
-    int deltaVert = Math.abs(vertFrom - vertTo);
 
     if (horizFrom == horizTo) {
       if (vertFrom < vertTo) {

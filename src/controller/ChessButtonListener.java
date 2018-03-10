@@ -49,7 +49,7 @@ public class ChessButtonListener implements ActionListener {
         model.move(horizFrom, vertFrom, horizTo, vertTo);
         model.advancePlayer();
 
-        view.setMessage(model.currentPlayer().s +"'s move.");
+        view.setMessage(model.currentPlayer().s + "'s move.");
 
         if ((horizTo == 1 || horizTo == 8) && model.getPieceAt(horizTo, vertTo).getType() == ChessPieceType.PAWN) {
 
@@ -66,7 +66,6 @@ public class ChessButtonListener implements ActionListener {
         }
 
       } catch (IllegalArgumentException iae) {
-
         view.setMessage(iae.getMessage() + " Retry.");
       }
 
@@ -84,9 +83,7 @@ public class ChessButtonListener implements ActionListener {
       view.setMessage("Stalemate!");
     }
 
-
     view.redraw();
-
 
   }
 
