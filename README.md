@@ -1,4 +1,4 @@
-#Chess Program
+# Chess Program
 
 This is a personal project local multiplayer chess program designed using Model-View-Controller architecture among other object-oriented design practices. The view was implemented in Java Swing, and tests were created in JUnit for the model logic.
 
