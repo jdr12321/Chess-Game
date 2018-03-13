@@ -18,8 +18,8 @@ public class ChessController implements IChessController {
   private IChessModel model;
   private IChessView view;
 
-  ChessButtonListener buttonListener = new ChessButtonListener();
-  ChessKeyListener keyListener = new ChessKeyListener();
+  private ChessButtonListener buttonListener = new ChessButtonListener();
+  private ChessKeyListener keyListener = new ChessKeyListener();
 
   /**
    * Default constructor, for most of game only two commands supported are n for new game, u for

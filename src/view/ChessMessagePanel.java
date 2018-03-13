@@ -14,7 +14,7 @@ import model.ChessPiece;
  */
 public class ChessMessagePanel extends javax.swing.JPanel {
 
-  String message = "White's move.";
+  private String message = "White's move.";
 
   /**
    * Default constructor of the panel.

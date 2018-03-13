@@ -16,10 +16,10 @@ import view.IChessView;
  */
 public class ChessPromotingController implements IChessController {
 
-  IChessModel model;
-  IChessView view;
+  private IChessModel model;
+  private IChessView view;
 
-  ChessKeyListener keyListener = new ChessKeyListener();
+  private ChessKeyListener keyListener = new ChessKeyListener();
 
   /**
    * Default constructor, contains key press commands for n, r, q, b for different possible

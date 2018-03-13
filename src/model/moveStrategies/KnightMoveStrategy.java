@@ -18,7 +18,7 @@ import static model.ChessPieceType.NONE;
  */
 public class KnightMoveStrategy implements IChessMoveStrategy {
 
-  IChessModel model;
+  private IChessModel model;
 
   /**
    * Constructs this object containing the model of the chess board for it to judge moves against

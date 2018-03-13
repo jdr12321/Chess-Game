@@ -10,7 +10,7 @@ public class ChessTile {
 
   private final int horizontalPosition;
   private final int verticalPosition;
-  ChessPiece piece;
+  private ChessPiece piece;
 
   /**
    * Builds an empty chess tile with no piece with the designated coordinates

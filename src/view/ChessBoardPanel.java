@@ -27,8 +27,7 @@ public class ChessBoardPanel extends javax.swing.JPanel {
   private final IChessModel model;
   private ActionListener controller;
   private Point selectedSquare = null;
-
-  List<JButton> buttons;
+  private List<JButton> buttons;
 
   /**
    * Initializes this panel linked to the given Chess board model

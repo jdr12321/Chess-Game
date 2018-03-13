@@ -15,8 +15,8 @@ import static model.ChessPlayer.*;
  */
 public class ChessBoard implements IChessModel {
 
-  List<ChessTile> tiles = new ArrayList<>();
-  Stack<List<ChessTile>> prevMoves = new Stack<>();
+  private List<ChessTile> tiles = new ArrayList<>();
+  private Stack<List<ChessTile>> prevMoves = new Stack<>();
 
   private ChessPlayer nextPlayer;
   private ChessPlayer prevPlayer;

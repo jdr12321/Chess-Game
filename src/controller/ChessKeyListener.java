@@ -15,10 +15,10 @@ import view.IChessView;
  */
 public class ChessKeyListener implements KeyListener {
 
-  IChessModel model;
-  IChessView view;
+  private IChessModel model;
+  private IChessView view;
 
-  Map<Integer, KeyCommand> allCommands = new HashMap<Integer, KeyCommand>();
+  private Map<Integer, KeyCommand> allCommands = new HashMap<Integer, KeyCommand>();
 
   /**
    * Add a command to be supported by this listener and executed on a certain key press

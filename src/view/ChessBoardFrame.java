@@ -16,10 +16,10 @@ import model.IChessModel;
  */
 public class ChessBoardFrame extends JFrame implements IChessView  {
 
-  IChessModel model;
-  IChessController controller;
-  ChessBoardPanel chessBoard;
-  ChessMessagePanel messages;
+  private IChessModel model;
+  private IChessController controller;
+  private ChessBoardPanel chessBoard;
+  private ChessMessagePanel messages;
 
   /**
    * Builds a frame linked to the given model
