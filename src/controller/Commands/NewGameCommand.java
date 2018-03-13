@@ -7,7 +7,7 @@ import view.IChessView;
 /**
  * Command sets the game start back to a starting one
  */
-public class NewGameCommand implements KeyCommand {
+public class NewGameCommand implements IKeyCommand {
 
   @Override
   public void execute(IChessModel model, IChessView view) {

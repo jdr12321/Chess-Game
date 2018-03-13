@@ -6,7 +6,7 @@ import view.IChessView;
 /**
  * General interface for any kind of chess game keyboard command
  */
-public interface KeyCommand {
+public interface IKeyCommand {
 
   /**
    * Execute the action linked to this specific type of key command on the given model and view

@@ -6,7 +6,7 @@ import view.IChessView;
 /**
  * Undoes the last move on the board
  */
-public class UndoCommand implements KeyCommand {
+public class UndoCommand implements IKeyCommand {
 
   @Override
   public void execute(IChessModel model, IChessView view) {

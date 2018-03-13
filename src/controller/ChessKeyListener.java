@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import controller.Commands.KeyCommand;
+import controller.Commands.IKeyCommand;
 import model.IChessModel;
 import view.IChessView;
 
@@ -18,14 +18,14 @@ public class ChessKeyListener implements KeyListener {
   private IChessModel model;
   private IChessView view;
 
-  private Map<Integer, KeyCommand> allCommands = new HashMap<Integer, KeyCommand>();
+  private Map<Integer, IKeyCommand> allCommands = new HashMap<Integer, IKeyCommand>();
 
   /**
    * Add a command to be supported by this listener and executed on a certain key press
    * @param code number representing the key press to execute this command
    * @param command the command to execute on the key press
    */
-  public void addCommand(int code, KeyCommand command) {
+  public void addCommand(int code, IKeyCommand command) {
     allCommands.put(code, command);
   }
 
@@ -55,7 +55,7 @@ public class ChessKeyListener implements KeyListener {
   @Override
   public void keyPressed(KeyEvent e) {
 
-    KeyCommand command = allCommands.get(e.getKeyCode());
+    IKeyCommand command = allCommands.get(e.getKeyCode());
 
     if (command != null) {
       command.execute(model, view);

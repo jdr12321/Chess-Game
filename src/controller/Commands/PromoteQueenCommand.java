@@ -8,7 +8,7 @@ import view.IChessView;
 /**
  * Command designates a pawn to be promoted to a queen
  */
-public class PromoteQueenCommand implements KeyCommand {
+public class PromoteQueenCommand implements IKeyCommand {
 
   @Override
   public void execute(IChessModel model, IChessView view) {
